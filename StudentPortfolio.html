@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDENT PORTFOLIO</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #fafaf8;
+  --off: #f4f3ef;
+  --border: #e5e4de;
+  --muted: #9e9b91;
+  --mid: #6b6860;
+  --text: #1c1b18;
+  --green: #2d6a4f;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 56px;
+  background: rgba(250,250,248,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-name { font-family: var(--mono); font-size: 13px; font-weight: 300; letter-spacing: 0.04em; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 13px; font-weight: 300; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+section { max-width: 720px; margin: 0 auto; padding: 100px 24px 0; }
+section:last-of-type { padding-bottom: 120px; }
+
+.hero { padding-top: 140px; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; font-weight: 300;
+  color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.dot-live {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+h1 {
+  font-size: clamp(36px, 6vw, 54px); font-weight: 300;
+  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px;
+}
+h1 em { font-style: italic; font-weight: 300; }
+
+.hero-bio {
+  font-size: 17px; font-weight: 300; color: var(--mid);
+  line-height: 1.7; max-width: 520px; margin-bottom: 40px;
+}
+
+.hero-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 12px; font-weight: 300; color: var(--mid);
+  border: 1px solid var(--border); border-radius: 100px; padding: 7px 14px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.pill:hover { color: var(--text); border-color: var(--mid); }
+
+.rule {
+  border: none; border-top: 1px solid var(--border);
+  max-width: 720px; margin: 72px auto 0; padding: 0 24px;
+}
+
+.label {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 10px;
+}
+.label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.about-grid { display: grid; grid-template-columns: 1fr 160px; gap: 48px; align-items: start; }
+.about-text { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.8; }
+.about-meta { display: flex; flex-direction: column; gap: 16px; }
+
+.meta-row { display: flex; flex-direction: column; gap: 2px; }
+.meta-key { font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.meta-val { font-size: 13px; font-weight: 400; color: var(--text); }
+
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 40px; }
+
+.skill {
+  font-family: var(--mono); font-size: 12px; font-weight: 300; color: var(--mid);
+  border: 1px solid var(--border); border-radius: 4px; padding: 5px 11px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.skill:hover { color: var(--text); border-color: var(--text); background: var(--off); }
+
+.projects-list { display: flex; flex-direction: column; gap: 12px; }
+
+.project-card {
+  border: 1px solid var(--border); border-radius: 8px; padding: 28px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.project-card:hover { border-color: #c0beb7; background: var(--off); }
+
+.proj-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+.proj-name { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.proj-date { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 3px; white-space: nowrap; }
+.proj-desc { font-size: 14px; font-weight: 300; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
+
+.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tag {
+  font-family: var(--mono); font-size: 11px; font-weight: 300; color: var(--muted);
+  background: var(--off); border: 1px solid var(--border); border-radius: 3px; padding: 3px 8px;
+}
+
+.proj-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.proj-list li { font-size: 13px; font-weight: 300; color: var(--mid); display: flex; align-items: baseline; gap: 8px; }
+.proj-list li::before { content: '–'; color: var(--muted); font-size: 11px; flex-shrink: 0; }
+
+.edu-card {
+  border: 1px solid var(--border); border-radius: 8px; padding: 28px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  transition: border-color 0.2s;
+}
+.edu-card:hover { border-color: #c0beb7; }
+
+.edu-degree { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
+.edu-school { font-size: 13px; font-weight: 300; color: var(--mid); margin-bottom: 3px; }
+.edu-period { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+.edu-badge {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--green); border: 1px solid var(--green);
+  opacity: 0.7; border-radius: 100px; padding: 5px 12px; white-space: nowrap;
+}
+
+.cert-list { display: flex; flex-direction: column; gap: 10px; margin-top: 40px; }
+
+.cert-item {
+  display: flex; align-items: center; gap: 16px;
+  border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cert-item:hover { border-color: #c0beb7; background: var(--off); }
+
+.cert-num { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 20px; }
+.cert-name { font-size: 14px; font-weight: 400; margin-bottom: 2px; }
+.cert-issuer { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+.contact-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+
+.contact-head { font-size: 30px; font-weight: 300; letter-spacing: -0.025em; line-height: 1.2; }
+.contact-head em { font-style: italic; }
+
+.contact-items { display: flex; flex-direction: column; gap: 10px; }
+
+.contact-link {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12px; color: var(--mid);
+  transition: color 0.2s;
+}
+.contact-link:hover { color: var(--text); }
+.contact-link svg { opacity: 0.45; flex-shrink: 0; }
+
+footer {
+  border-top: 1px solid var(--border); padding: 24px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-t { font-family: var(--mono); font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.04em; }
+
+.fi { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fi.vis { opacity: 1; transform: none; }
+
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section { padding-left: 20px; padding-right: 20px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-row { flex-direction: column; align-items: flex-start; }
+  footer { padding: 20px; flex-direction: column; gap: 6px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">student name</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow"><span class="dot-live"></span>open to opportunities</div>
+  <h1>Student name<br><em>intrested &amp; domain </em></h1>
+  <p class="hero-bio">education nd what you build </p>
+  <div class="hero-links">
+    <a href="mailto:suraj00surajoo7@gmail.com" class="pill">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+      @ MAIL ID 
+    </a>
+    <a href="tel:+919480396579" class="pill">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 2h3l1.5 4L6 7.5a9 9 0 004.5 4.5L12 10l4 1.5V15a1 1 0 01-1 1C6 16 0 10 0 3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+      @contact number
+    </a>
+    <span class="pill">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6c0 4.5 5 9 5 9s5-4.5 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+      @ location
+    </span>
+  </div>
+      <a href="#resume" class="pill" style="margin-top:4px; border-color: var(--text); color: var(--text); font-weight:400;">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Read Resume 
+    </a>
+</section>
+
+<hr class="rule" style="margin-top:64px">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="label fi">About</div>
+  <div class="about-grid fi">
+    <p class="about-text">intoduction about the student</p>
+    <div class="about-meta">
+      <div class="meta-row"><span class="meta-key">Degree</span><span class="meta-val">domanin</span></div>
+      <div class="meta-row"><span class="meta-key">University</span><span class="meta-val">college nd location</span></div>
+      <div class="meta-row"><span class="meta-key">Graduating</span><span class="meta-val">year of graduation</span></div>
+      <div class="meta-row"><span class="meta-key">Languages</span><span class="meta-val">English, kannada, Hindi</span></div>
+    </div>
+  </div>
+
+  <div class="skills-wrap fi">
+    <span class="skill">S K I L L S</span>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="label fi">Projects</div>
+  <div class="projects-list">
+
+    <div class="project-card fi">
+      <div class="proj-header">
+        <div class="proj-name">PROJECT_TITLE</div>
+        <div class="proj-date">DATE/MONTH/YEAR</div>
+      </div>
+      <p class="proj-desc">INTRODUCTION OF YOUR PROJECT</p>
+      <div class="proj-tags">
+        <span class="tag">LANGUAGE</span><span class="tag">DOMAIN</span><span class="tag">Research</span>
+      </div>
+      <ul class="proj-list">
+        <li>FEAUTURES OF PROJECT</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- EDUCATION CERTS -->
+<section id="education">
+  <div class="label fi">Education</div>
+  <div class="edu-card fi">
+    <div>
+      <div class="edu-degree">Degree</div>
+      <div class="edu-school">college / University</div>
+      <div class="edu-period">duration of degree from starting date to ending date </div>
+    </div>
+    <span class="edu-badge">In progress</span>
+  </div>
+
+  <!--CERTEFECTIONS-->
+  <div class="cert-list fi">
+    <div class="label" style="margin-bottom:0;margin-top:0">Certifications</div>
+    <div class="cert-item">
+      <span class="cert-num">01</span>
+      <div><div class="cert-name">--DOMAIN--</div><div class="cert-issuer">COMPONY OFFERED</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="label fi">Contact</div>
+  <div class="contact-row fi">
+    <div class="contact-head">Let's work<br><em>together.</em></div>
+    <div class="contact-items">
+      <a href="mailto:suraj00surajoo7@gmail.com" class="contact-link">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        @mail_ID
+      </a>
+      <a href="tel:+919480396579" class="contact-link">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 2h3l1.5 4L6 7.5a9 9 0 004.5 4.5L12 10l4 1.5V15a1 1 0 01-1 1C6 16 0 10 0 3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        @Contact_number
+      </a>
+      <div class="contact-link">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6c0 4.5 5 9 5 9s5-4.5 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        @location
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-t">© suraj00surajoo7</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('vis'), i * 50);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
